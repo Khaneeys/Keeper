@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  "mongodb+srv://admin-khaneeys:kanish14@cluster0.hyq8k.mongodb.net/noteDB",
+  DB,
   {useNewUrlParser: true}
 );
 
