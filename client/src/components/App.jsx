@@ -1,62 +1,19 @@
-import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import Note from "./Note";
-import CreateArea from "./CreateArea";
-import axios from "axios"
+import React from "react";
+import {  BrowserRouter,  Route,  Routes} from 'react-router-dom';
+import Notes from './Notes'
+import Login from './Login'
+import Register from './Register'
 
 function App() {
-  const [notes, setNotes] = useState([]);
-
-  function addNote(newNote) {
-    setNotes(prevNotes => {
-      return [...prevNotes, newNote];
-    });
-  }
-
-  useEffect(() => {
-     getList();
-   });
-
-  function getList() {
-    axios.get("http://localhost:4000/note")
-    .then((res) => {
-      setNotes(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  };
-
-  function deleteNote(id) {
-    axios.delete(`http://localhost:4000/note/${id}`)
-    .then(() => {
-      setNotes(prevNotes => {
-        return prevNotes.filter((note) => note.id !== id);
-      });
-    });
-  };
-
-
-
   return (
-    <div>
-      <Header />
-      <CreateArea onAdd={addNote} />
-      {notes.map((noteItem, index) => {
-        return (
-          <Note
-            key={index}
-            id={noteItem._id}
-            title={noteItem.title}
-            content={noteItem.content}
-            onDelete={deleteNote}
-          />
-        );
-      })}
-      <Footer />
-    </div>
-  );
+    <BrowserRouter>
+    <Routes>
+    <Route path="/notes" element={<Notes />} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/register" element={<Register />} /> 
+    </Routes>
+</BrowserRouter>
+  )
 }
 
-export default App;
+export default App

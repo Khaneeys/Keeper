@@ -39,7 +39,6 @@ function CreateArea(props) {
     });
 
     event.preventDefault();
-    props.onAdd(note);
   }
 
   function expand() {
